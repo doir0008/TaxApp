@@ -1,0 +1,73 @@
+﻿<Page
+    x:Class="Tax_App.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Tax_App"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Height="643.931">
+
+    <Grid Name="mainGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="wideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="359" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="purchaseAmountStackPanel.Orientation" Value="Horizontal" />
+                    </VisualState.Setters>
+
+                </VisualState>
+                <VisualState x:Name="narrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+
+                    <VisualState.Setters>
+                        <Setter Target="purchaseAmountStackPanel.Orientation" Value="Vertical" />
+                        <Setter Target="image.Visibility" Value="Collapsed"/>
+                        <Setter Target="taxAmountLabel.Margin" Value="0, 5, 0, 0"/>
+                        <Setter Target="taxAmount.Margin" Value="0, 5, 0, 0"/>
+                        <Setter Target="totalAmountLabel.Margin" Value="0, 5, 0, 0"/>
+                        <Setter Target="totalAmount.Margin" Value="0, 5, 0, 0"/>
+
+                    </VisualState.Setters>
+
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".1*"/>
+            <RowDefinition Height=".1*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Image x:Name="image" HorizontalAlignment="Center" Height="100" Margin="186,219.667,74,217" Grid.Row="2" VerticalAlignment="Center" Width="100" Source="Assets/taxes-1.jpg" Opacity="0.5"/>
+
+        <TextBlock x:Name="AppTitle" HorizontalAlignment="Center" Grid.Row="0" Text="Tax Calculator" VerticalAlignment="Top" Margin="20, 0, 20, 0" Style="{StaticResource TitleTextBlockStyle}" />
+        <TextBlock x:Name="AppMessage" HorizontalAlignment="Center" Grid.Row="1" Text="Enter Purchase Price" VerticalAlignment="Top" Margin="20, 0, 20, 0" Style="{StaticResource TitleTextBlockStyle}" FontSize="30"/>
+
+        <StackPanel x:Name="mainStackPanel" Margin="20,0,20,0" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="2">
+            <StackPanel x:Name="purchaseAmountStackPanel" Orientation="Horizontal">
+                <TextBlock x:Name="purchaseAmountLabel" HorizontalAlignment="Left" VerticalAlignment="Top" Text="Purchase Price:" FontSize="24"/>
+                <TextBox x:Name="purchaseAmount" TabIndex="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" Text="$0.00" Margin="20, 0, 0, 0" InputScope="CurrencyAmount" GotFocus="purchaseAmount_GotFocus" LostFocus="purchaseAmount_LostFocus" TextChanged="purchaseAmount_TextChanged" ToolTipService.ToolTip="Enter the cost of your purchase here:  Maximum 11 digits." MaxLength="11"/>
+            </StackPanel>
+
+            <TextBlock x:Name="taxTypeLabel" HorizontalAlignment="Left" VerticalAlignment="Top" Text="Tax Type:" FontSize="24" Margin="0, 20, 0, 0" />
+            <RadioButton x:Name="GSTRadioButton" GroupName="taxRateGroup" TabIndex="1" Click="radioButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Content="GST 5%" Tag="0.05" ToolTipService.ToolTip="Select if only paying the Goods and Services Tax."/>
+            <RadioButton x:Name="PSTRadioButton" GroupName="taxRateGroup" TabIndex="2" Click="radioButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Content="PST 8%" Tag="0.08" ToolTipService.ToolTip="Select if only paying Provincial Sales Tax." />
+            <RadioButton x:Name="HSTRadioButton" GroupName="taxRateGroup" TabIndex="3" Click="radioButton_Click" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="24" Content="HST 13%" Tag="0.13" IsChecked="True" ToolTipService.ToolTip="Select if paying Harmonized Sales Tax which is both Provincial Sales Tax and Goods and Services Tax combined." />
+            <TextBlock x:Name="taxAmountLabel" HorizontalAlignment="Left" VerticalAlignment="Top" Text="Tax Amount:" FontSize="24" Margin="0, 10, 0, 0" />
+            <TextBlock x:Name="taxAmount" HorizontalAlignment="Left" VerticalAlignment="Top" Text="$0.00" FontSize="36" Margin="0, 10, 0, 0" Foreground="Red" ToolTipService.ToolTip="The amount of tax for your purchase."/>
+            <TextBlock x:Name="totalAmountLabel" HorizontalAlignment="Left" VerticalAlignment="Top" Text="Total Amount" FontSize="24" Margin="0, 10, 0, 0"/>
+            <TextBlock x:Name="totalAmount" HorizontalAlignment="Left" VerticalAlignment="Top" Text="$0.00" FontSize="36" Margin="0, 10, 0, 0" ToolTipService.ToolTip="The total cost of your purchase including tax." />
+
+
+        </StackPanel>
+
+    </Grid>
+</Page>
